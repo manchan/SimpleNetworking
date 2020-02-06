@@ -20,13 +20,14 @@ public struct Endpoint<Output> {
 public extension Endpoint where Output: Decodable {
     init(method: Method,
          path: String,
+         body: Data? = nil,
          queryParameters: [String: String] = [:],
          dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate) {
         self.init(method: method,
                   path: path,
                   headers: [.accept: ContentType.json.rawValue],
                   queryParameters: queryParameters,
-                  body: nil,
+                  body: body,
                   output: decode(with: dateDecodingStrategy))
     }
 
